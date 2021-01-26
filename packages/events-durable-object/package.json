@@ -1,0 +1,16 @@
+{
+  "name": "@a0-events/events-durable-object",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Durable object which keeps track of event subscribers",
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@a0-events/common": "^1.0.0"
+  }
+}
