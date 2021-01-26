@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
+    "rootDir": "src",
+    "types": ["@cloudflare/workers-types"],
+    "lib": ["esnext", "WebWorker"],
+    "esModuleInterop": true
+  },
+  "compileOnSave": true,
+  "include": ["src/*.ts", "src/**/*.ts", "../../node_modules/@cloudflare/workers-types/index.d.ts"],
+  "exclude": ["node_modules/", "dist/"]
+}
