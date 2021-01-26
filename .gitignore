@@ -105,3 +105,6 @@ dist
 node_modules
 transpiled
 worker
+
+## Rollup
+.rollup.cache

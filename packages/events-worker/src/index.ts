@@ -1,5 +1,3 @@
-import jsonResponse from '@a0-events/common';
-
 declare global {
   const userEventSubscribers: DurableObjectNamespace;
 }
