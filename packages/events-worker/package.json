@@ -1,13 +1,13 @@
 {
-  "name": "@a0-events/events-durable-object",
+  "name": "@a0-events/events-worker",
   "version": "1.0.0",
   "private": true,
-  "description": "Cloudflare Durable object which keeps track of event subscribers",
+  "description": "Cloudflare Worker which will talk to the Durable Object",
   "author": "Sandrino Di Mattia",
   "license": "MIT",
   "main": "src/index.ts",
   "scripts": {
-    "build": "rollup -c",
+    "build": "wrangler build",
     "publish": "npm run build && ./scripts/deploy.sh",
     "lint": "eslint \"src/**/*.ts\""
   },

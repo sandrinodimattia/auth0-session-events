@@ -1,0 +1,5 @@
+name = "events-worker"
+type = "webpack"
+account_id = ""
+webpack_config = "webpack.config.js"
+workers_dev = true
