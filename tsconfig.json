@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "sourceMap": true,
+    "baseUrl": "./packages",
+    "strict": true,
+    "esModuleInterop": true,
+    "composite": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./packages/common/tsconfig.json" },
+    { "path": "./packages/events-durable-object/tsconfig.json" },
+    { "path": "./packages/events-worker/tsconfig.json" },
+    { "path": "./packages/jwt-authorizer-worker/tsconfig.json" }
+  ]
+}

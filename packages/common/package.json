@@ -1,0 +1,15 @@
+{
+  "name": "@a0-events/common",
+  "version": "1.0.0",
+  "description": "Helpers for the different Cloudflare Workers",
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "tsc --watch --preserveWatchOutput -p tsconfig-build.json",
+    "build": "tsc -p tsconfig-build.json",
+    "lint": "eslint src/**/*.ts"
+  }
+}
