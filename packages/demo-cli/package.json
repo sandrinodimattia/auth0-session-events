@@ -1,0 +1,17 @@
+{
+  "name": "demo-cli",
+  "version": "1.0.0",
+  "description": "Demo of a CLI receiving real-time session chang events",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "pino": "^6.11.0",
+    "pino-pretty": "^4.3.0",
+    "ws": "^7.4.2"
+  }
+}
