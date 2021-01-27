@@ -13,7 +13,7 @@ function App({ Component, pageProps }) {
       domain={process.env.NEXT_PUBLIC_DOMAIN}
       clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
       audience={process.env.NEXT_PUBLIC_AUDIENCE}
-      scope="listen:events:self"
+      scope="openid profile"
       redirectUri={typeof window !== 'undefined' && window.location.origin}
       onRedirectCallback={(appState) => {
         router.replace(appState?.returnTo || window.location.pathname);

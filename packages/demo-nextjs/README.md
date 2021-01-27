@@ -24,8 +24,9 @@ Create a config file with the information from your client:
 ```dotenv
 NEXT_PUBLIC_DOMAIN={YOUR-TENANT}.auth0.com
 NEXT_PUBLIC_CLIENT_ID={YOUR-CLIENT-ID}
-NEXT_PUBLIC_AUDIENCE=https://events.auth0a.com/api
+NEXT_PUBLIC_AUDIENCE=https://timesheets-api.herokuapp.com/api
 NEXT_PUBLIC_AUTH0_EVENTS_DOMAIN=events.auth0a.com/{YOUR-TENANT}
+NEXT_PUBLIC_API_BASE_URL=The URL to where your API is deployed, https://timesheets-api.herokuapp.com/api (the demo-api project)
 ```
 
 > Note: Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session-events#connecting-your-log-stream) to find your `NEXT_PUBLIC_AUTH0_EVENTS_DOMAIN` (eg: `events.auth0.com/sandrino@eu`)

@@ -15,7 +15,7 @@ Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session
 Start by creating a new API in the Auth0 Dashboard:
 
 - Name: **Timesheets API**
-- Identifier: **https://timesheets-api.herokuapp.com/** (can be anything)
+- Identifier: **https://timesheets-api.herokuapp.com/api** (can be anything)
 
 ### Create an application
 
@@ -36,7 +36,7 @@ AUTH0_EVENTS_DOMAIN=events.auth0a.com/sandrino-dev
 AUTH0_DOMAIN=sandrino-dev.auth0.com
 AUTH0_CLIENT_ID=VMeuuCMWfzcVQ1iPx6NxdBKppjafWktA
 AUTH0_CLIENT_SECRET=...
-AUTH0_API_IDENTIFIER=https://timesheets-api.herokuapp.com/
+AUTH0_API_IDENTIFIER=https://timesheets-api.herokuapp.com/api
 ```
 
 > Note: Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session-events#connecting-your-log-stream) to find your `AUTH0_EVENTS_DOMAIN` (eg: `events.auth0.com/sandrino@eu`)
