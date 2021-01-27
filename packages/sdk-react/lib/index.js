@@ -17,6 +17,8 @@ module.exports = (eventsDomain) => {
         logout({ returnTo: window.location.origin });
       } else if (msg.type === 'user_blocked') {
         logout({ returnTo: window.location.origin });
+      } else if (msg.type === 'password_changed') {
+        logout({ returnTo: window.location.origin });
       }
     }
   });
