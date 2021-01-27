@@ -23,11 +23,18 @@ AUTH0_CLIENT_SECRET=...
 
 > Note that the `AUTH0_EVENTS_DOMAIN` follows a specific structure. Read more about it in the main [README.md](../../README.md)
 
+Make sure you first complete the initial bootstrapping of repository by running this in the root:
+
+```bash
+npm install -g lerna
+lerna bootstrap
+```
+
 Then run the application:
 
 ```bash
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 The application will connect to the stream and start receiving events for all users in a given tenant:

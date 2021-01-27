@@ -1,0 +1,25 @@
+{
+  "name": "@a0-events/demo-api",
+  "version": "1.0.0",
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "node index"
+  },
+  "dependencies": {
+    "@a0-events/sdk-express": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "jwks-rsa": "^1.12.2",
+    "pino": "^6.11.0",
+    "pino-pretty": "^4.3.0"
+  }
+}

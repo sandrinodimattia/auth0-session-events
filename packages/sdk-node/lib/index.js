@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 module.exports = class Auth0Listener extends EventEmitter {
   constructor(domain, logger) {
     super();
-    this.pingInterval = 10000;
+    this.pingInterval = 15000;
     this.connected = false;
     this.domain = domain;
     this.logger = logger || {

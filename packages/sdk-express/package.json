@@ -1,0 +1,19 @@
+{
+  "name": "@a0-events/sdk-express",
+  "version": "1.0.0",
+  "description": "@a0-events SDK for Express.js",
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@a0-events/sdk-node": "^1.0.0",
+    "auth0": "^2.32.0",
+    "date-fns": "^2.16.1"
+  }
+}
