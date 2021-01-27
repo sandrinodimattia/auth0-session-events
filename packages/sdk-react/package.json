@@ -1,0 +1,21 @@
+{
+  "name": "@a0-events/sdk-react",
+  "version": "1.0.0",
+  "description": "@a0-events SDK for React",
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "peerDependencies": {
+    "@auth0/auth0-react": "^1.2.0",
+    "react": "^17.0.1"
+  },
+  "dependencies": {
+    "react-use-websocket": "^2.4.0"
+  }
+}
