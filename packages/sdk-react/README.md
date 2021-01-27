@@ -30,3 +30,9 @@ When a `logout`, `password_changed` or `user_blocked` event is received we will 
 > Note: Since Auth0 `id_tokens` don't contain any session information today it's not possible to correlate the session ID from a logout event to the current session. As a result this means that a logout in one browser will also sign you out from your other browsers.
 
 Under the covers this will use the "Auth0 Events API" to authenticate with the stream. Make sure that API is created first before testing this: [instructions](https://github.com/sandrinodimattia/auth0-session-events#defining-an-api).
+
+## Backlog
+
+- [Automatically handle reconnects](https://github.com/websockets/ws/wiki/Websocket-client-implementation-for-auto-reconnect)
+- Only sign out when the event's Session ID matches the Session ID of the current session (eg: by checking the id_token)
+- Provider/Context support to share the logic/socket across components

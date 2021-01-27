@@ -2,33 +2,18 @@ import React from 'react';
 import Head from 'next/head';
 
 import Header from './header';
+import Footer from './footer';
 
 const Layout = ({ children }) => (
-  <>
+  <div className="flex flex-col min-h-screen ">
     <Head>
-      <title>Acme Timesheets</title>
+      <title>ACME Timesheets</title>
     </Head>
 
     <Header />
-
-    <main>
-      <div className="container">{children}</div>
-    </main>
-
-    <style jsx>{`
-      .container {
-        max-width: 42rem;
-        margin: 1.5rem auto;
-      }
-    `}</style>
-    <style jsx global>{`
-      body {
-        margin: 0;
-        color: #333;
-        font-family: -apple-system, 'Segoe UI';
-      }
-    `}</style>
-  </>
+    <main className="flex-grow">{children}</main>
+    <Footer />
+  </div>
 );
 
 export default Layout;

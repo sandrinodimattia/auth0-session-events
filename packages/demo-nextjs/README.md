@@ -9,8 +9,9 @@ This is an example SPA which will automatically sign out when an administrator b
 Start by creating a SPA Application in the [Auth0 Dashboard](https://manage.auth0.com/):
 
 1. Give the client a name, eg: "Acme Timesheets"
-2. Configure the **Callback URL** and **Allowed Origins** to `http://localhost:3000`
-3. Take note of the **Auth0 Domain**, the **Auth0 Client ID** and **Auth0 Client Secret**
+2. Configure the **Callback URL** to `http://localhost:3000`
+3. Configur the origins to: `http://localhost:3000`
+4. Take note of the **Auth0 Domain**, the **Auth0 Client ID** and **Auth0 Client Secret**
 
 ### Creating the Auth0 Events API in Auth0
 
