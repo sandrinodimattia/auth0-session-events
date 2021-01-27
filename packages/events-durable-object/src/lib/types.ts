@@ -16,6 +16,7 @@ export interface WorkerEnvironment {}
  * An Auth0 Log Stream event.
  */
 export interface LogStreamingEvent {
+  log_id: string;
   data: Record<string, any>;
 }
 
@@ -23,6 +24,7 @@ export interface LogStreamingEvent {
  * A user event.
  */
 export interface Event {
+  id: string;
   type: string;
   date: string;
   user_id: string;

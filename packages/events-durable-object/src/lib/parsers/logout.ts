@@ -7,8 +7,9 @@ export default class LogoutEventParser implements EventParser {
   }
 
   parse(event: LogStreamingEvent): Event {
-    const { data } = event;
+    const { log_id, data } = event;
     return {
+      id: log_id,
       type: 'logout',
       date: data.date,
       user_id: data.user_id,

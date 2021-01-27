@@ -52,10 +52,19 @@ INFO     [2021-01-27 10:51:12.319 +0000]: An message was received
       "scope": "listen:events",
       "gty": "client-credentials"
     }
-DEBUG    [2021-01-27 10:51:22.200 +0000]: Sending ping
-DEBUG    [2021-01-27 10:51:22.418 +0000]: Pong received
-DEBUG    [2021-01-27 10:51:32.202 +0000]: Sending ping
+INFO     [2021-01-27 13:33:25.030 +0000]: An message was received
+    id: "90020210127133051827000601596381203086547380272820650050"
+    type: "user_blocked"
+    date: "2021-01-27T13:30:47.963Z"
+    user_id: "samlp|saml-idp|auth0|5ea970c754b14c0c12639144"
+INFO     [2021-01-27 13:33:25.030 +0000]: An message was received
+    id: "90020210127133021627000895894192895532242320509236150354"
+    type: "user_blocked"
+    date: "2021-01-27T13:30:19.322Z"
+    user_id: "auth0|5f2a364fe60194003d7f9ae4"
 ```
+
+> Note that M2M clients with the `listen:events` scope will also receive the last 100 events that have been sent. This is useful in cases where your APIs might autoscale and new instances come and go which need to rebuild the revocation list.
 
 The `*` filter indicates that the client is allowed to receive events for all users (eg: to keep track of blocked users and reject any token they still try to use).
 

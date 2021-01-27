@@ -20,9 +20,14 @@ export class EventSubscribersDurableObject {
    */
   private sessions: Array<Session>;
 
-  constructor(/*controller: DurableObjectState /*, env: WorkerEnvironment */) {
-    // this.env = env;
+  /**
+   * Persisted events.
+   */
+  private eventStore: DurableObjectStorage;
+
+  constructor(controller: DurableObjectState /*, env: WorkerEnvironment */) {
     this.sessions = [];
+    this.eventStore = controller.storage;
   }
 
   fetch(request: Request): Promise<Response> {
@@ -55,6 +60,12 @@ export class EventSubscribersDurableObject {
                 filter: s.filter,
                 terminated: s.quit
               }))
+          });
+        case '/api/events':
+          const records = await this.eventStore.list({ reverse: true, limit: 100 });
+          const events = [...records.values()].map((e) => JSON.parse(e as string));
+          return jsonResponse(200, {
+            events
           });
         case '/api/subscribe':
           return this.subscribe(tenantDomain, request);
@@ -172,6 +183,14 @@ export class EventSubscribersDurableObject {
                 claims
               })
             );
+
+            // Send the last most recent events.
+            if (session.filter === '*') {
+              const records = await this.eventStore.list({ reverse: true, limit: 100 });
+              [...records.values()].forEach((value) => {
+                serverSocket.send(value);
+              });
+            }
           } catch (err) {
             serverSocket.quit = true;
             serverSocket.send(
@@ -216,6 +235,10 @@ export class EventSubscribersDurableObject {
       const jsonEvent = JSON.stringify(event);
       this.sessions.forEach((session: Session) => {
         try {
+          // Should we await here?
+          // For active tenants this could be a lot of events handled at once, we wouldn't want to make this too slow.
+          this.eventStore.put(event.id, jsonEvent);
+
           // Send to listeners that are allowed to receive all messages.
           if (session.sub && session.filter === '*') {
             session.webSocket.send(jsonEvent);

@@ -63,6 +63,7 @@ export default async (request: Request, env: WorkerEnvironment): Promise<Respons
         });
       // Forward all API routes to the Durable Object.
       case '/api/_debug':
+      case '/api/events':
       case '/api/listeners':
       case '/api/subscribe':
       case '/api/publish':

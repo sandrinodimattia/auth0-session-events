@@ -81,6 +81,14 @@ curl https://events.auth0a.com/sandrino-dev/api/listeners | jq
 
 > Note: This endpoint should require authentication in the future.
 
+Get the last 100 events which have been published:
+
+```bash
+curl https://events.auth0a.com/sandrino-dev/api/events | jq
+```
+
+> Note: This endpoint should require authentication in the future.
+
 ## Commands
 
 Install all dependencies:

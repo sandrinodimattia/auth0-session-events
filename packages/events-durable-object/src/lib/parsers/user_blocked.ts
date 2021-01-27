@@ -20,8 +20,9 @@ export default class UserBlockedEventParser implements EventParser {
   }
 
   parse(event: LogStreamingEvent): Event {
-    const { data } = event;
+    const { log_id, data } = event;
     return {
+      id: log_id,
       type: 'user_blocked',
       date: data.date,
       user_id: data.details.response.body.user_id
