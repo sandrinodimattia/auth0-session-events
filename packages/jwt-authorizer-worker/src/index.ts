@@ -1,4 +1,4 @@
-import jsonResponse from '@a0-events/common';
+import { jsonResponse } from '@a0-events/common';
 import { JwtVerifier } from '@serverless-jwt/jwt-verifier';
 
 /**
@@ -13,7 +13,7 @@ const handleRequest = async (request: Request): Promise<Response> => {
   if (path !== '/' || request.method !== 'POST') {
     return jsonResponse(400, {
       error: 'not_found',
-      error_description: `Route not found: ${request.method} ${path}`,
+      error_description: `Route not found: ${request.method} ${path}`
     });
   }
 
@@ -22,14 +22,14 @@ const handleRequest = async (request: Request): Promise<Response> => {
     if (typeof issuer === 'undefined' || issuer === null) {
       return jsonResponse(400, {
         error: 'issuer_required',
-        error_description: 'The issuer must be provided',
+        error_description: 'The issuer must be provided'
       });
     }
 
     if (typeof access_token === 'undefined' || access_token === null) {
       return jsonResponse(400, {
         error: 'access_token_required',
-        error_description: 'The access_token must be provided',
+        error_description: 'The access_token must be provided'
       });
     }
 
@@ -38,7 +38,7 @@ const handleRequest = async (request: Request): Promise<Response> => {
     if (!verifier) {
       verifier = verifiers[issuer] = new JwtVerifier({
         audience: 'https://events.auth0a.com/api',
-        issuer,
+        issuer
       });
     }
 
@@ -47,7 +47,7 @@ const handleRequest = async (request: Request): Promise<Response> => {
   } catch (err) {
     return jsonResponse(400, {
       error: err.code || 'error',
-      error_description: err.message,
+      error_description: err.message
     });
   }
 };
