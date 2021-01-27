@@ -9,6 +9,7 @@
   "author": "Sandrino Di Mattia",
   "license": "MIT",
   "dependencies": {
+    "auth0": "^2.32.0",
     "dotenv": "^8.2.0",
     "pino": "^6.11.0",
     "pino-pretty": "^4.3.0",
