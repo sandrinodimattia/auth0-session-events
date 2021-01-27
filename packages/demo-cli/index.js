@@ -1,7 +1,9 @@
 require('dotenv').config();
-const logger = require('./lib/logger');
-const Auth0Listener = require('./lib/listener');
+
 const { AuthenticationClient } = require('auth0');
+const Auth0EventsClient = require('@a0-events/sdk-node');
+
+const logger = require('./lib/logger');
 
 const run = async () => {
   logger.debug(`Authenticating client ${process.env.AUTH0_CLIENT_ID} to ${process.env.AUTH0_DOMAIN}`);
@@ -18,7 +20,7 @@ const run = async () => {
   });
 
   // Connect to the stream.
-  const listener = new Auth0Listener(process.env.AUTH0_EVENTS_DOMAIN, logger);
+  const listener = new Auth0EventsClient(process.env.AUTH0_EVENTS_DOMAIN, logger);
   listener.on('error', (err) => {
     logger.error(err, 'An error occured');
   });

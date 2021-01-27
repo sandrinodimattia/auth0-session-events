@@ -1,0 +1,17 @@
+{
+  "name": "@a0-events/sdk-node",
+  "version": "1.0.0",
+  "description": "@a0-events SDK for Node.js",
+  "author": "Sandrino Di Mattia",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "ws": "^7.4.2"
+  }
+}
