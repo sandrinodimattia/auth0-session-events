@@ -6,6 +6,10 @@ This means that when a user is blocked, the API will be alerted of that and will
 
 ## Getting Started
 
+### Creating the Auth0 Events API in Auth0
+
+Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session-events#defining-an-api) to create the "Auth0 Events API", which is used to authenticate with the event stream.
+
 ### Defining an API
 
 Start by creating a new API in the Auth0 Dashboard:
@@ -34,6 +38,8 @@ AUTH0_CLIENT_ID=VMeuuCMWfzcVQ1iPx6NxdBKppjafWktA
 AUTH0_CLIENT_SECRET=...
 AUTH0_API_IDENTIFIER=https://timesheets-api.herokuapp.com/
 ```
+
+> Note: Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session-events#connecting-your-log-stream) to find your `AUTH0_EVENTS_DOMAIN` (eg: `events.auth0.com/sandrino@eu`)
 
 Make sure you first complete the initial bootstrapping of repository by running this in the root:
 

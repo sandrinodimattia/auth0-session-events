@@ -1,6 +1,14 @@
 # Demo CLI
 
-## Auth0 Configuration
+Sample application representing a backend which receives all user events for a given tenant.
+
+## Testing the CLI
+
+### Creating the Auth0 Events API in Auth0
+
+Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session-events#defining-an-api) to create the "Auth0 Events API", which is used to authenticate with the event stream.
+
+### Creating the client
 
 In order to test this CLI you'll want to create a Machine to Machine application in the [dashboard](https://manage.auth0.com/):
 
@@ -21,7 +29,7 @@ AUTH0_CLIENT_ID=VMeuuCMWfzcVQ1iPx6NxdBKppjafWktA
 AUTH0_CLIENT_SECRET=...
 ```
 
-> Note that the `AUTH0_EVENTS_DOMAIN` follows a specific structure. Read more about it in the main [README.md](../../README.md)
+> Note: Follow the instructions [here](https://github.com/sandrinodimattia/auth0-session-events#connecting-your-log-stream) to find your `AUTH0_EVENTS_DOMAIN` (eg: `events.auth0.com/sandrino@eu`)
 
 Make sure you first complete the initial bootstrapping of repository by running this in the root:
 
