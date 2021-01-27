@@ -13,9 +13,16 @@ const dispatch = (req: Request, path: string, domain: string, ns: DurableObjectN
   const tenantId = ns.idFromName(domain);
   const tenantObject: any = ns.get(tenantId);
 
-  const internalUrl = new URL(req.url);
-  internalUrl.pathname = path;
-  return tenantObject.fetch(internalUrl, req);
+  // Rewrite the url.
+  const url = new URL(req.url);
+  url.pathname = path;
+
+  // Add custom headers to the request.
+  const durableObjectRequest = new Request(req);
+  durableObjectRequest.headers.set('x-tenant-domain', domain);
+
+  // Call the durable object.
+  return tenantObject.fetch(url, durableObjectRequest);
 };
 
 /**
@@ -54,6 +61,8 @@ export default async (request: Request, env: WorkerEnvironment): Promise<Respons
           tenant,
           tenant_domain: tenantDomain
         });
+      // Forward all API routes to the Durable Object.
+      case '/api/_debug':
       case '/api/listeners':
       case '/api/subscribe':
       case '/api/publish':

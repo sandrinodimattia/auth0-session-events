@@ -28,7 +28,22 @@ export class EventSubscribersDurableObject {
   fetch(request: Request): Promise<Response> {
     return handleErrors(request, async () => {
       const path = getPath(request.url);
+      const tenantDomain = request.headers.get('x-tenant-domain');
+      if (!tenantDomain) {
+        return jsonResponse(404, {
+          error: 'not_found',
+          error_description: `The tenant domain is missing`
+        });
+      }
+
       switch (path) {
+        case '/api/_debug':
+          return jsonResponse(200, {
+            host: request.headers.get('host'),
+            url: request.url,
+            path,
+            tenant_domain: tenantDomain
+          });
         case '/api/listeners':
           return jsonResponse(200, {
             count: this.sessions.length,
@@ -42,7 +57,7 @@ export class EventSubscribersDurableObject {
               }))
           });
         case '/api/subscribe':
-          return this.subscribe(request);
+          return this.subscribe(tenantDomain, request);
         case '/api/publish':
           return this.broadcast(request);
         default:
@@ -82,9 +97,10 @@ export class EventSubscribersDurableObject {
 
   /**
    * Accept the websocket request from any client that wishes to subscribe.
+   * @param tenantDomain string
    * @param request Request
    */
-  async subscribe(request: Request): Promise<Response> {
+  async subscribe(tenantDomain: string, request: Request): Promise<Response> {
     if (request.headers.get('Upgrade') !== 'websocket') {
       return jsonResponse(404, {
         error: 'bad_request',
@@ -129,7 +145,7 @@ export class EventSubscribersDurableObject {
           try {
             // Authorize the request.
             const accessToken = data.access_token;
-            const claims = await this.authorize('https://sandrino-dev.auth0.com/', accessToken);
+            const claims = await this.authorize(`https://${tenantDomain}/`, accessToken);
             if (!claims.scope) {
               throw new Error('The provided token does not contain any scopes');
             }

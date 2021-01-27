@@ -43,6 +43,44 @@ Follow [the steps described here](./packages/demo-cli/README.md) to run the CLI 
 
 > Note that we currently only watch the `user_blocked` and `logout` events.
 
+### API Endpoints
+
+Call the Cloudflare Worker and get back some helpful information:
+
+```bash
+curl https://events.auth0a.com/sandrino-dev/_debug | jq
+```
+
+Call the Durable Object for my tenant and get back some helpful information:
+
+```bash
+curl https://events.auth0a.com/sandrino-dev/api/_debug | jq
+```
+
+Publish events to all listeners (used by Log Streaming)
+
+```bash
+curl https://events.auth0a.com/sandrino-dev/api/publish | jq
+```
+
+> Note: This endpoint should require authentication in the future.
+
+Connect to the stream to receive events:
+
+```bash
+curl https://events.auth0a.com/sandrino-dev/api/subscribe | jq
+```
+
+> Note: After connecting you'll need to send a `{ "type": "authenticate", "access_token": "..." }` message to be authenticated. Only then will you receive events ([example](https://github.com/sandrinodimattia/auth0-session-events/blob/master/packages/demo-cli/lib/listener.js#L49-L54)).
+
+Get a list of all listeners currently connected to the stream:
+
+```bash
+curl https://events.auth0a.com/sandrino-dev/api/listeners | jq
+```
+
+> Note: This endpoint should require authentication in the future.
+
 ## Commands
 
 Install all dependencies:
