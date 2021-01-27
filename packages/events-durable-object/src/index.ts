@@ -1,3 +1,4 @@
+import { Event } from './lib/types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { handleErrors, getPath, jsonResponse, wsResponse } from '@a0-events/common';
 
@@ -8,6 +9,7 @@ interface Session {
   connected: Date;
   webSocket: any;
   sub?: string;
+  filter?: string;
 }
 
 export class EventSubscribersDurableObject {
@@ -34,7 +36,9 @@ export class EventSubscribersDurableObject {
               .filter((s) => !s.quit)
               .map((s) => ({
                 connected_on: s.connected,
-                sub: s.sub
+                sub: s.sub,
+                filter: s.filter,
+                terminated: s.quit
               }))
           });
         case '/api/subscribe':
@@ -126,6 +130,21 @@ export class EventSubscribersDurableObject {
             // Authorize the request.
             const accessToken = data.access_token;
             const claims = await this.authorize('https://sandrino-dev.auth0.com/', accessToken);
+            if (!claims.scope) {
+              throw new Error('The provided token does not contain any scopes');
+            }
+
+            // Right scopes are required.
+            const scopes = claims.scope.split(' ');
+            if (scopes.indexOf('listen:events:self') > -1) {
+              session.filter = 'self';
+            } else if (scopes.indexOf('listen:events') > -1) {
+              session.filter = '*';
+            } else {
+              throw new Error('The provided token cannot be used to listen for events');
+            }
+
+            // The user is now authenticated.
             session.sub = claims.sub as string;
 
             // Notify the client that the authentication succeeded.
@@ -133,6 +152,7 @@ export class EventSubscribersDurableObject {
               JSON.stringify({
                 type: 'authenticated',
                 sub: session.sub,
+                filter: session.filter,
                 claims
               })
             );
@@ -167,26 +187,37 @@ export class EventSubscribersDurableObject {
     return wsResponse(clientSocket);
   }
 
+  /**
+   * Broadcast events to all consumers.
+   * @param request
+   */
   async broadcast(request: Request): Promise<Response> {
     const body = await request.json();
-    const events = await body.map((e: any) => parse(e)).filter((e: any) => e != null);
+    const events = await body.map((e: any) => parse(e)).filter((e: Event) => e != null);
 
-    const jsonEvents = events.map((e: any) => JSON.stringify(e));
-
-    this.sessions = this.sessions.filter((session) => {
-      try {
-        // Only send events to authenticated sockets.
-        if (session.sub) {
-          jsonEvents.forEach((e: any) => session.webSocket.send(e));
+    // Send events to appropriate listeners.
+    events.forEach((event: Event) => {
+      const jsonEvent = JSON.stringify(event);
+      this.sessions.forEach((session: Session) => {
+        try {
+          // Send to listeners that are allowed to receive all messages.
+          if (session.sub && session.filter === '*') {
+            session.webSocket.send(jsonEvent);
+          } else if (session.sub && session.filter === 'self' && session.sub === event.user_id) {
+            // Send to listeners that are allowed to receive messages for their current user.
+            session.webSocket.send(jsonEvent);
+          }
+        } catch (err) {
+          // eslint-disable-next-line no-param-reassign
+          session.quit = true;
         }
-        return true;
-      } catch (err) {
-        // eslint-disable-next-line no-param-reassign
-        session.quit = true;
-        return false;
-      }
+      });
     });
 
+    // Filter out dead sessions.
+    this.sessions = this.sessions.filter((session) => !session.quit);
+
+    // Return the list of events we parsed.
     return jsonResponse(200, { received: body.length, events });
   }
 }

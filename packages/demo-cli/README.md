@@ -56,3 +56,27 @@ DEBUG    [2021-01-27 10:51:22.200 +0000]: Sending ping
 DEBUG    [2021-01-27 10:51:22.418 +0000]: Pong received
 DEBUG    [2021-01-27 10:51:32.202 +0000]: Sending ping
 ```
+
+The `*` filter indicates that the client is allowed to receive events for all users (eg: to keep track of blocked users and reject any token they still try to use).
+
+## Errors
+
+If you client doesn't have the required scope (`listen:events`) you'll see one of the following errors:
+
+```
+DEBUG    [2021-01-27 10:55:31.113 +0000]: Authenticating client VMeuuCMWfzcVQ1iPx6NxdBKppjafWktA to sandrino-dev.auth0.com
+ERROR    [2021-01-27 10:55:31.671 +0000] (access_denied): {"error":"access_denied","error_description":"Client has not been granted scopes: listen:events"}
+    access_denied: {"error":"access_denied","error_description":"Client has not been granted scopes: listen:events"}
+```
+
+```
+DEBUG    [2021-01-27 10:57:28.021 +0000]: Authenticating client VMeuuCMWfzcVQ1iPx6NxdBKppjafWktA to sandrino-dev.auth0.com
+DEBUG    [2021-01-27 10:57:28.473 +0000]: Initializing connection to wss://events.auth0a.com/sandrino-dev/api/subscribe
+DEBUG    [2021-01-27 10:57:28.728 +0000]: Connected to the stream
+INFO     [2021-01-27 10:57:28.730 +0000]: An message was received
+    type: "connected"
+INFO     [2021-01-27 10:57:28.856 +0000]: An message was received
+    type: "authentication_failed"
+    error_description: "The provided token does not contain any scopes"
+DEBUG    [2021-01-27 10:57:28.892 +0000]: Connection closed: 1009
+```
