@@ -26,6 +26,7 @@ export interface Event {
   type: string;
   date: string;
   user_id: string;
+  session_id?: string;
 }
 
 /**
