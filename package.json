@@ -7,7 +7,7 @@
   "scripts": {
     "cf:build": "lerna run build",
     "demo-api:start": "lerna run start --stream --scope=@a0-events/demo-api",
-    "heroku-postbuild": "lerna bootstrap && yarn install"
+    "heroku-postbuild": "lerna bootstrap"
   },
   "workspaces": [
     "packages/*"
