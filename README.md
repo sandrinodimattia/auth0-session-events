@@ -41,7 +41,7 @@ A first demo we have is a sample CLI which connects to the stream and displays t
 
 Follow [the steps described here](./packages/demo-cli/README.md) to run the CLI demo.
 
-> Note that we currently only watch the `user_blocked` and `logout` events.
+> Note that we currently only watch the `password_changed`, `user_blocked` and `logout` events.
 
 ### API Endpoints
 

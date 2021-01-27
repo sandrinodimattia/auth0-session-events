@@ -25,7 +25,7 @@ export default function Home() {
 }
 ```
 
-When a `logout` or `user_blocked` event is received we will automatically sign out the user.
+When a `logout`, `password_changed` or `user_blocked` event is received we will automatically sign out the user.
 
 > Note: Since Auth0 `id_tokens` don't contain any session information today it's not possible to correlate the session ID from a logout event to the current session. As a result this means that a logout in one browser will also sign you out from your other browsers.
 
