@@ -16,6 +16,8 @@ export default function Home() {
         setAuthenticating(false);
       } else if (msg.type === 'logout') {
         logout({ returnTo: window.location.origin });
+      } else if (msg.type === 'user_blocked') {
+        logout({ returnTo: window.location.origin });
       }
     }
   });
