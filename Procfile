@@ -1,1 +1,1 @@
-web: npm run demo-api:start
+web: node ./packages/demo-api/index
